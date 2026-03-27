@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects | M.G. Portfolio</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="projects-browser">
+
+    <aside id="filter-sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Filters</h3>
+            <button id="close-sidebar" class="btn-icon">✖</button>
+        </div>
+        <div class="filter-group">
+            <label><input type="checkbox" value="Hardware"> Hardware</label>
+            <label><input type="checkbox" value="TypeScript"> TypeScript</label>
+            <label><input type="checkbox" value="Robotics"> Robotics</label>
+            <label><input type="checkbox" value="Frontend"> Frontend</label>
+        </div>
+    </aside>
+
+    <main class="projects-content">
+        <header class="controls-header">
+            <button id="open-sidebar" class="btn-primary">☰ Filter Projects</button>
+            
+            <div class="sorting-controls">
+                <button id="sort-date" class="btn-secondary">Date <span class="arrow">↓</span></button>
+            </div>
+        </header>
+
+        <div id="project-grid" class="grid-container">
+            
+            <a href="#" class="project-tile has-video">
+                <div class="media-container">
+                    <video src="https://www.w3schools.com/html/mov_bbb.mp4" loop muted playsinline></video>
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Dummy Image">
+                </div>
+                <div class="tile-content">
+                    <div class="tile-header">
+                        <h3>Test Project Visuals</h3>
+                        <span class="favorite-star">★</span>
+                    </div>
+                    <p>This is a hardcoded tile to test our CSS grid and video hover effect without needing to compile TypeScript.</p>
+                    <div class="filters-wrapper">
+                        <span class="filter-tag">Hardware</span>
+                        <span class="filter-tag">Test</span>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </main>
+</body>
+</html>
