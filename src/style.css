@@ -166,10 +166,28 @@ button {
 
 /* --- sidebar styling --- */
 .sidebar {
-    width: 250px;
-    background: white;
+    position: fixed;
+    top: 0;
+    right: -320px; /* hides off-screen to the right */
+    width: 300px;
+    height: 100vh;
+    background: #1e1e1e;
     padding: 1.5rem;
-    border-right: 1px solid #ddd;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.5);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    color: #e0e0e0;
+}
+
+/* will be added/removed when clicking the button */
+.sidebar.open {
+    right: 0; 
+}
+
+/* ensure the main container takes full width now that sidebar is floating */
+.projects-content {
+    width: 100%;
+    padding: 2rem;
 }
 
 .sidebar-header {
