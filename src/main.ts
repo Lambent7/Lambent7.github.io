@@ -1,4 +1,4 @@
-import { myProjects, Project } from './projects';
+import { myProjects, Project } from './projects.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const gridContainer = document.getElementById("project-grid");
