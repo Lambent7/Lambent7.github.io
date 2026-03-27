@@ -1,70 +1,96 @@
 import { myProjects, Project } from './projects';
 
-// wait for HTML to load before running script
 document.addEventListener("DOMContentLoaded", () => {
     const gridContainer = document.getElementById("project-grid");
+    if (!gridContainer) return;
 
-    if (!gridContainer) return; // check
+    // --- 1. Render Function ---
+    // We wrap this in a function so we can call it again every time we sort
+    function renderProjects() {
+        function createTileHTML(project: Project): string {
+            const tagsHTML = project.filters.map(tag => `<span class="filter-tag">${tag}</span>`).join('');
+            const mediaHTML = project.videoPath 
+                ? `<video src="${project.videoPath}" loop muted playsinline></video>
+                   <img src="${project.imagePath}" alt="${project.title}">`
+                : `<img src="${project.imagePath}" alt="${project.title}">`;
+            const starHTML = project.isFavorite ? `<span class="favorite-star">★</span>` : '';
+            const videoClass = project.videoPath ? 'has-video' : '';
 
-    // generate HTML for a single project tile
-    function createTileHTML(project: Project): string {
-        // HTML for tags
-        const tagsHTML = project.filters.map(tag => `<span class="filter-tag">${tag}</span>`).join('');
-        
-        // build HTML for media (include video only if it exists)
-        const mediaHTML = project.videoPath 
-            ? `<video src="${project.videoPath}" loop muted playsinline></video>
-               <img src="${project.imagePath}" alt="${project.title}">`
-            : `<img src="${project.imagePath}" alt="${project.title}">`;
-
-        // favorite icon
-        const starHTML = project.isFavorite ? `<span class="favorite-star">★</span>` : '';
-
-        // Check if there is a video to add our special hover class
-        const videoClass = project.videoPath ? 'has-video' : '';
-
-        // return full HTML string for tile
-        return `
-            <a href="${project.url}" class="project-tile ${videoClass}" data-id="${project.id}">
-                <div class="media-container">
-                    ${mediaHTML}
-                </div>
-                <div class="tile-content">
-                    <div class="tile-header">
-                        <h3>${project.title}</h3>
-                        ${starHTML}
+            return `
+                <a href="${project.url}" class="project-tile ${videoClass}" data-id="${project.id}">
+                    <div class="media-container">
+                        ${mediaHTML}
                     </div>
-                    <p>${project.description}</p>
-                    <div class="filters-wrapper">
-                        ${tagsHTML}
+                    <div class="tile-content">
+                        <div class="tile-header">
+                            <h3>${project.title}</h3>
+                            ${starHTML}
+                        </div>
+                        <p>${project.description}</p>
+                        <div class="filters-wrapper">
+                            ${tagsHTML}
+                        </div>
                     </div>
-                </div>
-            </a>
-        `;
+                </a>
+            `;
+        }
+
+        gridContainer.innerHTML = myProjects.map(createTileHTML).join('');
+        attachVideoHoverListeners();
     }
 
-    // 1. render all projects to the grid
-    gridContainer.innerHTML = myProjects.map(createTileHTML).join('');
+    // --- 2. Video Hover Logic ---
+    function attachVideoHoverListeners() {
+        const tiles = document.querySelectorAll('.project-tile');
+        tiles.forEach(tile => {
+            const video = tile.querySelector('video') as HTMLVideoElement | null;
+            if (video) {
+                tile.addEventListener('mouseenter', () => video.play().catch(() => {}));
+                tile.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            }
+        });
+    }
 
-    // 2. handle video playback on hover
-    // videos only play when actively hovering
-    const tiles = document.querySelectorAll('.project-tile');
-    
-    tiles.forEach(tile => {
-        const video = tile.querySelector('video') as HTMLVideoElement | null;
-        
-        if (video) {
-            tile.addEventListener('mouseenter', () => {
-                video.play().catch(e => console.error("Video play prevented:", e));
-            });
+    // --- 3. Sidebar Open/Close Logic ---
+    const sidebar = document.getElementById('filter-sidebar');
+    const openBtn = document.getElementById('open-sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+
+    if (sidebar && openBtn && closeBtn) {
+        openBtn.addEventListener('click', () => sidebar.classList.add('open'));
+        closeBtn.addEventListener('click', () => sidebar.classList.remove('open'));
+    }
+
+    // --- 4. Sort by Date Logic ---
+    let isDateDescending = true; // Start with newest first
+    const sortDateBtn = document.getElementById('sort-date');
+
+    if (sortDateBtn) {
+        // Initial sort before first render
+        myProjects.sort((a, b) => b.datePosted.getTime() - a.datePosted.getTime());
+
+        sortDateBtn.addEventListener('click', () => {
+            isDateDescending = !isDateDescending; // Toggle state
             
-            tile.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0; // Reset video to the beginning
+            // Update the arrow icon
+            const arrow = sortDateBtn.querySelector('.arrow');
+            if (arrow) arrow.textContent = isDateDescending ? '↓' : '↑';
+
+            // Sort the array based on state
+            myProjects.sort((a, b) => {
+                const dateA = a.datePosted.getTime();
+                const dateB = b.datePosted.getTime();
+                return isDateDescending ? dateB - dateA : dateA - dateB;
             });
-        }
-    });
 
-    // --- placeholder for sorting logic ---
+            // Re-draw the grid with the new order
+            renderProjects();
+        });
+    }
 
+    // --- Initialize the Page ---
+    renderProjects();
 });
