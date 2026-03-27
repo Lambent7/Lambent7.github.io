@@ -20,9 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // favorite icon
         const starHTML = project.isFavorite ? `<span class="favorite-star">★</span>` : '';
 
+        // Check if there is a video to add our special hover class
+        const videoClass = project.videoPath ? 'has-video' : '';
+
         // return full HTML string for tile
         return `
-            <a href="${project.url}" class="project-tile" data-id="${project.id}">
+            <a href="${project.url}" class="project-tile ${videoClass}" data-id="${project.id}">
                 <div class="media-container">
                     ${mediaHTML}
                 </div>

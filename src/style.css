@@ -81,8 +81,8 @@ body {
 }
 
 /* hover to reveal video */
-.project-tile:hover .media-container img {
-    opacity: 0; 
+.project-tile.has-video:hover .media-container img {
+    opacity: 0;
 }
 
 /* tile content (title, description, tags) */
