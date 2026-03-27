@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Projects | M.G. Portfolio</title>
     <link rel="stylesheet" href="src/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="projects-browser">
 
     <aside id="filter-sidebar" class="sidebar">
         <div class="sidebar-header">
             <h3>Filters</h3>
-            <button id="close-sidebar" class="btn-icon">✖</button>
+            <button id="close-sidebar" class="btn-icon"><i data-lucide="x"></i></button>
         </div>
         <div class="filter-group">
             <label><input type="checkbox" value="Hardware"> Hardware</label>
@@ -23,10 +24,10 @@
     <main class="projects-content">
         <header class="controls-header">
             <div class="sorting-controls">
-                <button id="sort-date" class="btn-secondary">Date <span class="arrow">⬇</span></button>
+                <button id="sort-date" class="btn-secondary">Date <i id="sort-icon" data-lucide="chevron-down"></i></button>
             </div>
 
-            <button id="open-sidebar" class="btn-primary">☰ Filter</button>
+            <button id="open-sidebar" class="btn-primary"><i data-lucide="list-filter"></i> Filter</button>
         </header>
 
         <div id="project-grid" class="grid-container">
@@ -51,7 +52,7 @@
             
         </div>
     </main>
-    
+
     <script type="module" src="dist/main.js"></script>
 </body>
 </html>
