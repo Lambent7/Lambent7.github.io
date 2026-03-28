@@ -218,4 +218,26 @@ button {
     height: 20px;
     fill: gold;
     color: gold;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+.btn-text {
+    background: none;
+    color: #888;
+    font-size: 0.8rem;
+    padding: 0;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+.btn-text:hover {
+    color: #fff;
+}
+
+.filter-group label {
+    transition: color 0.2s ease;
+}
+
+.filter-group label:hover {
+    color: #fff;
 }

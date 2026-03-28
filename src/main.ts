@@ -8,12 +8,56 @@ document.addEventListener("DOMContentLoaded", () => {
     const sortDateBtn = document.getElementById('sort-date');
     const filterCheckboxes = document.querySelectorAll('.filter-group input[type="checkbox"]');
 
+    function renderFilterCheckboxes() {
+    const filterGroup = document.querySelector('.filter-group');
+    if (!filterGroup) return;
+
+    // get every tag
+    const allTags = myProjects.flatMap(p => p.filters);
+    
+    // remove duplicates and sort alphabetically
+    const uniqueTags = Array.from(new Set(allTags)).sort();
+
+    // generate the HTML for the labels/checkboxes
+    filterGroup.innerHTML = uniqueTags.map(tag => `
+        <label>
+            <input type="checkbox" value="${tag}" ${activeFilters.includes(tag) ? 'checked' : ''}>
+            ${tag}
+        </label>
+    `).join('');
+
+    // re-attach the event listeners to these new elements
+    filterGroup.querySelectorAll('input').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target.checked) {
+                activeFilters.push(target.value);
+            } else {
+                activeFilters = activeFilters.filter(f => f !== target.value);
+            }
+            renderProjects();
+        });
+    });
+}
+
+const clearBtn = document.getElementById('clear-filters');
+
+clearBtn?.addEventListener('click', () => {
+    activeFilters = []; // reset list
+    
+    // visually uncheck all boxes
+    const boxes = document.querySelectorAll('.filter-group input') as NodeListOf<HTMLInputElement>;
+    boxes.forEach(box => box.checked = false);
+    
+    renderProjects(); // refresh
+});
+
     let activeFilters: string[] = [];
     let isDateDescending = true;
 
     if (!gridContainer) return;
 
-    // --- 1. render func ---
+    // --- render func ---
     function renderProjects() {
         // filter for active checkboxes
         let displayProjects = myProjects;
