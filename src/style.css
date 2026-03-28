@@ -241,3 +241,104 @@ button {
 .filter-group label:hover {
     color: #fff;
 }
+
+/* Hero Container */
+.home-page {
+    margin: 0;
+    overflow: hidden; /* Prevents scrollbars on the home page */
+    background-color: #000;
+}
+
+.hero-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* The dark overlay so text stays readable */
+.hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Adjust 0.6 to make it darker or lighter */
+    z-index: 2;
+}
+
+/* Slideshow Logic */
+.bg-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: slideFade 15s infinite; /* 15s total loop for 3 images */
+}
+
+/* Stagger the animations for 3 images */
+.bg-slide:nth-child(2) { animation-delay: 5s; }
+.bg-slide:nth-child(3) { animation-delay: 10s; }
+
+@keyframes slideFade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }  /* Fade in quickly */
+    33% { opacity: 1; }  /* Stay visible */
+    43% { opacity: 0; }  /* Fade out */
+    100% { opacity: 0; }
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.skills-subtitle {
+    font-size: 1.5rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.description {
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: #aaa;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.btn-icon-link {
+    color: white;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.btn-icon-link:hover {
+    color: gold;
+    transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-buttons { flex-direction: column; }
+}

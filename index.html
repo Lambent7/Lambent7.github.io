@@ -2,12 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mitchell Graham Portfolio</title>
+    <title>Mitchell | Portfolio</title>
     <link rel="stylesheet" href="src/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <h1>Testing testing 1... 2... 3...</h1>
-    <div id="app"></div>
-    <script type="module" src="dist/main.js"></script>
+<body class="home-page">
+
+    <div class="hero-background">
+        <div class="bg-slide" style="background-image: url('assets/me-1.jpg');"></div>
+        <div class="bg-slide" style="background-image: url('assets/me-2.jpg');"></div>
+        <div class="bg-slide" style="background-image: url('assets/me-3.jpg');"></div>
+    </div>
+
+    <main class="hero-content">
+        <h1 class="fade-in">Hi, my name is Mitchell!</h1>
+        <h2 class="skills-subtitle">Full-Stack Developer | Hardware Enthusiast | Problem Solver</h2>
+        
+        <p class="description">
+            I specialize in building robust TypeScript applications and custom hardware solutions. 
+            I bridge the gap between physical components and digital interfaces, delivering 
+            high-performance tools that solve real-world problems. You should hire me because 
+            I don't just write code—I build systems that last.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="projects.html" class="btn-primary">
+                <i data-lucide="folder-kanban"></i> Projects
+            </a>
+            <a href="assets/mitchell-resume.pdf" class="btn-secondary" download>
+                <i data-lucide="file-down"></i> Resume
+            </a>
+            <a href="https://linkedin.com/in/yourprofile" class="btn-icon-link" target="_blank">
+                <i data-lucide="linkedin"></i>
+            </a>
+            <a href="https://github.com/Lambent7" class="btn-icon-link" target="_blank">
+                <i data-lucide="github"></i>
+            </a>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>
