@@ -79,7 +79,7 @@ clearBtn?.addEventListener('click', () => {
         gridContainer!.innerHTML = displayProjects.map(project => {
             const tagsHTML = project.filters.map(tag => `<span class="filter-tag">${tag}</span>`).join('');
             const videoClass = project.videoPath ? 'has-video' : '';
-            const starHTML = project.isFavorite ? `<i data-lucide="sparkle" class="favorite-star"></i>` : '';
+            const starHTML = project.isFavorite ? `<i data-lucide="star" class="favorite-star"></i>` : '';
             
             const mediaHTML = project.videoPath 
                 ? `<video src="${project.videoPath}" loop muted playsinline></video>
