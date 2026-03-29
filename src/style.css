@@ -9,10 +9,10 @@
 }
 
 body {
-    background-color: #000; /* Core background is black */
+    background-color: #000; /* Core background is black for everything */
     color: #333;
     line-height: 1.6;
-    min-height: 100vh; /* Ensure body is always full height */
+    min-height: 100vh;
 }
 
 /* =========================================
@@ -82,12 +82,12 @@ button, .btn-primary, .btn-secondary {
 }
 
 /* =========================================
-   3. PROJECTS PAGE STYLES
+   3. PROJECTS PAGE STYLES (Browsing View)
    ========================================= */
 .projects-page {
     display: flex;
     min-height: 100vh;
-    background-color: #f4f4f9; /* Light grey for project browsing */
+    background-color: #f4f4f9; /* Light grey for browsing contrast */
 }
 
 .projects-content {
@@ -113,7 +113,7 @@ button, .btn-primary, .btn-secondary {
     margin-top: 2rem;
 }
 
-/* Project Tiles */
+/* Project Tiles & Video Hover Logic */
 .project-tile {
     background: white;
     border-radius: 8px;
@@ -154,7 +154,7 @@ button, .btn-primary, .btn-secondary {
 }
 
 .project-tile.has-video:hover .media-container img {
-    opacity: 0;
+    opacity: 0; /* Fades image to reveal video when hovered */
 }
 
 .tile-content {
@@ -187,7 +187,7 @@ button, .btn-primary, .btn-secondary {
     padding-top: 1rem;
 }
 
-/* Sidebar (Projects Page) */
+/* Sidebar (Projects Only) */
 .sidebar {
     position: fixed;
     top: 0;
@@ -222,25 +222,26 @@ button, .btn-primary, .btn-secondary {
 .filter-group label:hover { color: #fff; }
 
 /* =========================================
-   4. HOME PAGE / HERO SECTION
+   4. HOME PAGE / HERO SECTION ( Reveal/Parallax)
    ========================================= */
 .home-page {
     background-color: #000;
     color: white;
-    /* Allow scrolling on the body */
+    /* Explicitly allow scrolling on the body so the relative text section moves */
     overflow-y: auto; 
     position: relative;
 }
 
 /* TOP: Visuals (Static/Sticky Layer) */
 .home-hero {
-    /* MAGIC EFFECT: Stick to top as body scrolls */
+    /* MAGIC EFFECT 1: Stick to top. z-index=1 keeps it behind content layer. */
     position: sticky; 
     top: 0; 
     width: 100%;
-    height: 75vh; /* Initial view is 75% screen height */
+    /* SPACING FIX: Lowered image section height so text starts higher */
+    height: 60vh; 
     overflow: hidden;
-    z-index: 1; /* Sits behind the content section */
+    z-index: 1; 
 }
 
 .hero-background {
@@ -248,19 +249,19 @@ button, .btn-primary, .btn-secondary {
     height: 100%;
 }
 
-/* The Subtle Gradient Melt Effect */
+/* MODIFIED: This is now just a subtle tint, not the main directional melt. */
 .home-hero::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 40%; /* Smooth fade before content covers it */
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* General darken for contrast initially */
     z-index: 5;
 }
 
-/* Slideshow Animation */
+/* Slideshow Animation for 3 images */
 .bg-slide {
     position: absolute;
     width: 100%;
@@ -283,16 +284,31 @@ button, .btn-primary, .btn-secondary {
     100% { opacity: 0; }
 }
 
-/* BOTTOM: Content on Black (Scrolling Layer) */
+/* BOTTOM: Content on Black (Scrolling Layer that covers visuals) */
 .home-info {
-    /* MAGIC EFFECT: Relative position and higher Z-index make it scroll OVER the sticky hero */
+    /* MAGIC EFFECT 2: Relative position with higher Z-index makes it scroll OVER sticky hero. */
     position: relative; 
     z-index: 10; 
-    /* Must have a solid background color to cover the image */
+    /* Must have a solid background color to cover the images as it moves up. */
     background-color: #000; 
-    padding: 100px 20px 140px 20px; /* Generous space for professional layout */
+    padding: 80px 20px 140px 20px; /* Adjust top padding for spacing gap */
     display: flex;
     justify-content: center;
+}
+
+/* FADE FIX: The NEW moving gradient melt effect is now here. */
+/* A pseudo-element creates a large fade that stays perfectly attached to the text. */
+.home-info::before {
+    content: '';
+    position: absolute;
+    /* Sits ABOVE the section, overlapping images as it scrolls up */
+    top: -25vh; /* How far up the fade goes. Bigger = smoother dissolve. */
+    left: 0;
+    width: 100%;
+    height: 25vh; /* The actual height of the gradient melt itself */
+    /* Linear gradient from transparent black at top to solid black at bottom */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    pointer-events: none; /* Let clicks pass through to images if user clicks above text */
 }
 
 .info-container {
@@ -328,8 +344,9 @@ button, .btn-primary, .btn-secondary {
     align-items: center;
 }
 
-/* Mobile Adjustments */
+/* Mobile Adjustments (Clean up buttons and text for small screens) */
 @media (max-width: 600px) {
     .info-container h1 { font-size: 2.5rem; }
     .hero-buttons { flex-direction: column; gap: 1.2rem; }
+    .home-info::before { top: -15vh; height: 15vh; } /* Tighter melt for mobile */
 }
