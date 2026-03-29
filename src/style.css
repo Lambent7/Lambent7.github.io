@@ -316,9 +316,7 @@ button, .btn-primary, .btn-secondary {
     font-size: 1.6rem;
     color: #888;
     font-weight: 300;
-    /* Hero (60vh) + Title (approx 10vh) + this margin (45vh) = 115vh. 
-       This guarantees the description is at least 15% off-screen on load. */
-    margin-bottom: 45vh; 
+    margin-bottom: 20vh; 
     letter-spacing: 1px;
 }
 
