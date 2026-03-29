@@ -20,7 +20,7 @@ body {
    ========================================= */
 .hero-buttons {
     display: flex;
-    gap: 3.5rem; /* Increased gap slightly for larger icons */
+    gap: 4rem; 
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -32,36 +32,38 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
-    width: 120px; /* Slightly wider container for the larger icon */
-    padding: 12px;
-    border-radius: 8px;
+    width: 140px; /* Wider to fit the big icons */
+    padding: 15px;
+    border-radius: 12px;
     transition: background 0.2s ease, transform 0.2s ease;
     border: 1px solid transparent;
 }
 
-/* UPDATED: Larger Icon Size (64px) */
-.desktop-icon i {
-    width: 64px !important;
-    height: 64px !important;
-    margin-bottom: 12px; /* More breathing room for the text */
-    stroke-width: 1.2px; /* Slightly thinner stroke for a cleaner look at large scale */
+/* FORCE ICON SIZE: Target both the tag and the resulting SVG */
+.desktop-icon i,
+.desktop-icon svg {
+    width: 80px !important;  /* Bumping to 80px for high impact */
+    height: 80px !important;
+    margin-bottom: 15px;
+    stroke-width: 1.2px; /* Thinner lines look more "techy" at large sizes */
+    display: block;
 }
 
 .desktop-icon span {
-    font-size: 1rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    font-size: 1.1rem; /* Slightly larger text to match the big icons */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 300;
 }
 
 .desktop-icon:hover {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transform: translateY(-4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
 }
 
 .desktop-icon:active {
     background: rgba(255, 255, 255, 0.2);
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
 /* =========================================
@@ -301,7 +303,7 @@ body {
 @media (max-width: 600px) {
     .info-container h1 { font-size: 2.5rem; }
     .hero-buttons { gap: 1rem; }
-    .desktop-icon { width: 90px; }
-    .desktop-icon i { width: 48px !important; height: 48px !important; }
+    .desktop-icon { width: 100px; }
+    .desktop-icon svg { width: 48px !important; height: 48px !important; }
     .home-info::before { top: -15vh; height: 15vh; }
 }
