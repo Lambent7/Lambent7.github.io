@@ -82,7 +82,7 @@ button, .btn-primary, .btn-secondary {
 }
 
 /* =========================================
-   3. PROJECTS PAGE STYLES (Browsing View)
+   3. PROJECTS PAGE STYLES
    ========================================= */
 .projects-page {
     display: flex;
@@ -229,12 +229,12 @@ button, .btn-primary, .btn-secondary {
     position: relative;
 }
 
-/* TOP: Visuals (Static/Sticky Layer) */
+/* TOP: Visuals (Static Layer) */
 .home-hero {
     position: sticky; 
     top: 0; 
     width: 100%;
-    height: 60vh; /* Lowered height for better spacing */
+    height: 60vh; 
     overflow: hidden;
     z-index: 1; 
 }
@@ -311,12 +311,14 @@ button, .btn-primary, .btn-secondary {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-/* SPACER FIX: Increased margin-bottom to push description down */
+/* THE "FOLD" SPACER: Updated to push description off-screen */
 .skills-subtitle {
     font-size: 1.6rem;
     color: #888;
     font-weight: 300;
-    margin-bottom: 5rem; /* Doubled from previous 2.5rem */
+    /* Hero (60vh) + Title (approx 10vh) + this margin (45vh) = 115vh. 
+       This guarantees the description is at least 15% off-screen on load. */
+    margin-bottom: 45vh; 
     letter-spacing: 1px;
 }
 
@@ -325,7 +327,7 @@ button, .btn-primary, .btn-secondary {
     color: #aaa;
     line-height: 1.8;
     max-width: 700px;
-    margin: 0 auto 5rem auto; /* Also balanced the bottom margin */
+    margin: 0 auto 5rem auto; 
 }
 
 .hero-buttons {
@@ -340,5 +342,6 @@ button, .btn-primary, .btn-secondary {
     .info-container h1 { font-size: 2.5rem; }
     .hero-buttons { flex-direction: column; gap: 1.2rem; }
     .home-info::before { top: -15vh; height: 15vh; }
-    .skills-subtitle { margin-bottom: 3rem; }
+    /* Slightly less margin for smaller mobile screens to avoid over-scrolling */
+    .skills-subtitle { margin-bottom: 40vh; } 
 }
