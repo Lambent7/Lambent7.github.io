@@ -9,9 +9,10 @@
 }
 
 body {
-    background-color: #000;
+    background-color: #000; /* Core background is black */
     color: #333;
     line-height: 1.6;
+    min-height: 100vh; /* Ensure body is always full height */
 }
 
 /* =========================================
@@ -226,14 +227,20 @@ button, .btn-primary, .btn-secondary {
 .home-page {
     background-color: #000;
     color: white;
+    /* Allow scrolling on the body */
+    overflow-y: auto; 
+    position: relative;
 }
 
-/* TOP: Visuals */
+/* TOP: Visuals (Static/Sticky Layer) */
 .home-hero {
-    position: relative;
+    /* MAGIC EFFECT: Stick to top as body scrolls */
+    position: sticky; 
+    top: 0; 
     width: 100%;
-    height: 75vh; /* How much screen the images take */
+    height: 75vh; /* Initial view is 75% screen height */
     overflow: hidden;
+    z-index: 1; /* Sits behind the content section */
 }
 
 .hero-background {
@@ -241,14 +248,14 @@ button, .btn-primary, .btn-secondary {
     height: 100%;
 }
 
-/* The Gradient Melt Effect */
+/* The Subtle Gradient Melt Effect */
 .home-hero::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%; /* Smooth fade into the content below */
+    height: 40%; /* Smooth fade before content covers it */
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
     z-index: 5;
 }
@@ -276,9 +283,14 @@ button, .btn-primary, .btn-secondary {
     100% { opacity: 0; }
 }
 
-/* BOTTOM: Content on Black */
+/* BOTTOM: Content on Black (Scrolling Layer) */
 .home-info {
-    padding: 80px 20px 120px 20px;
+    /* MAGIC EFFECT: Relative position and higher Z-index make it scroll OVER the sticky hero */
+    position: relative; 
+    z-index: 10; 
+    /* Must have a solid background color to cover the image */
+    background-color: #000; 
+    padding: 100px 20px 140px 20px; /* Generous space for professional layout */
     display: flex;
     justify-content: center;
 }
