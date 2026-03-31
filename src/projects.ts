@@ -13,26 +13,26 @@ export interface Project {
 
 export const myProjects: Project[] = [
     {
-        id: "weather-app",
-        title: "(EXAMPLE) Global Weather Tracker",
-        description: "A real-time weather dashboard utilizing a public API.",
-        imagePath: "assets/weather-static.jpg",
-        videoPath: "assets/weather-demo.mp4",
-        url: "https://github.com/Lambent7/weather-app",
+        id: "emotion_game",
+        title: "Emotion Game",
+        description: "A speedrunning game to type sentences that have a sense of the target emotion. An emotion classifying AI decides if you win or lose!",
+        imagePath: "assets/emotion_game.jpg",
+        videoPath: "assets/emotion_game.gif",
+        url: "https://github.com/Lambent7/Emotion-Game",
         hasGithubRepo: true,
-        isFavorite: true,
-        datePosted: new Date("2025-10-15"),
-        filters: ["TypeScript", "API", "Frontend"]
+        isFavorite: false,
+        datePosted: new Date("2026-03-31"),
+        filters: ["TypeScript", "API", ""]
     },
     {
-        id: "robotics-build",
-        title: "(EXAMPLE) Autonomous RC Car",
-        description: "Custom built RC car with obstacle avoidance.",
-        imagePath: "assets/rc-car.jpg",
-        url: "blog/autonomous-rc-car.html", 
+        id: "black_crown",
+        title: "Black Crown Game Console",
+        description: "Custom gaming console powered by the BC-250 (PS5) APU Board.",
+        imagePath: "assets/black_crown.jpg",
+        url: "blog/black_crown.html",
         hasGithubRepo: false,
-        isFavorite: false,
-        datePosted: new Date("2026-01-10"),
-        filters: ["Hardware", "C++", "Robotics"]
+        isFavorite: true,
+        datePosted: new Date("2026-03-31"),
+        filters: ["Hardware", "Linux", "3D Modeling", ]
     }
 ];
