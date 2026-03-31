@@ -17,7 +17,7 @@ export const myProjects: Project[] = [
         title: "Emotion Game",
         description: "A speedrunning game to type sentences that have a sense of the target emotion. An emotion classifying AI decides if you win or lose!",
         imagePath: "assets/emotion_game.jpg",
-        videoPath: "assets/emotion_game.gif",
+        videoPath: "assets/emotion_game.mp4",
         url: "https://github.com/Lambent7/Emotion-Game",
         hasGithubRepo: true,
         isFavorite: false,
