@@ -469,3 +469,64 @@ button {
     .desktop-icon svg { width: 48px !important; height: 48px !important; }
     .home-info::before { top: -15vh; height: 15vh; }
 }
+
+/* =========================================
+   5. BLOG PAGE STYLES
+   ========================================= */
+.blog-page .home-hero {
+    height: 45vh; /* Shorter header for blog posts */
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left; /* Align body text to left for reading readability */
+}
+
+.blog-title {
+    font-size: 3.5rem !important; /* Slightly smaller than main hero */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.blog-meta {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.blog-content {
+    font-size: 1.15rem;
+    color: #ccc;
+    line-height: 1.8;
+    max-width: 100%; /* Override .description max-width to use .blog-container width */
+    margin: 0 auto;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content h2, .blog-content h3 {
+    color: #fff;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+
+.back-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
