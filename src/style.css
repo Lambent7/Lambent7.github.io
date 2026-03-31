@@ -289,6 +289,73 @@ button {
 
 .sidebar.open { right: 0; }
 
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 1rem;
+}
+
+.sidebar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-category {
+    margin-bottom: 1.5rem;
+}
+
+.filter-category h4 {
+    color: #a0a0a0;
+    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.filter-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px; /* Slightly rounded block look */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: #ccc;
+    user-select: none;
+}
+
+.filter-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.filter-pill input:checked + span {
+    color: #fff;
+    font-weight: 600;
+}
+
+.filter-pill input[type="checkbox"] {
+    accent-color: #a855f7; /* Matches primary button theme! */
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    margin: 0;
+}
+
 /* =========================================
    4. HOME PAGE / HERO SECTION
    ========================================= */

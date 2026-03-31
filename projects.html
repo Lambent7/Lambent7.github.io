@@ -11,14 +11,24 @@
     <aside id="filter-sidebar" class="sidebar">
         <div class="sidebar-header">
             <h3>Filters</h3>
-            <button id="clear-filters" class="btn-text">Clear All</button>
-            <button id="close-sidebar" class="btn-icon"><i data-lucide="x"></i></button>
+            <div class="sidebar-actions">
+                <button id="clear-filters" class="btn-text">Clear All</button>
+                <button id="close-sidebar" class="btn-icon"><i data-lucide="x"></i></button>
+            </div>
         </div>
-        <div class="filter-group">
-            <label><input type="checkbox" value="Hardware"> Hardware</label>
-            <label><input type="checkbox" value="TypeScript"> TypeScript</label>
-            <label><input type="checkbox" value="Robotics"> Robotics</label>
-            <label><input type="checkbox" value="Frontend"> Frontend</label>
+        <div class="filter-category">
+            <h4>Domain</h4>
+            <div class="filter-group">
+                <label class="filter-pill"><input type="checkbox" value="Hardware"> <span>Hardware</span></label>
+                <label class="filter-pill"><input type="checkbox" value="Robotics"> <span>Robotics</span></label>
+            </div>
+        </div>
+        <div class="filter-category">
+            <h4>Technology</h4>
+            <div class="filter-group">
+                <label class="filter-pill"><input type="checkbox" value="TypeScript"> <span>TypeScript</span></label>
+                <label class="filter-pill"><input type="checkbox" value="Frontend"> <span>Frontend</span></label>
+            </div>
         </div>
     </aside>
 
