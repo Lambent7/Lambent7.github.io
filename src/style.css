@@ -530,3 +530,18 @@ button {
     justify-content: center;
     margin-bottom: 3rem;
 }
+
+.hero-back-btn {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 20; /* Keep it above the dark gradient overlay */
+    text-decoration: none;
+    border-radius: 8px; /* Standardize its roundness */
+}
+
+/* Share button styling override */
+button.desktop-icon {
+    border: none;
+    outline: none;
+}
