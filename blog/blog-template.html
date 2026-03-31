@@ -30,7 +30,7 @@
 
     <main class="home-info">
         <div class="info-container blog-container">
-            <h1 class="fade-in blog-title">Black Crown Game Console</h1>
+            <h1 class="fade-in blog-title">Understanding Custom Hardware Integration</h1>
             <h2 class="blog-meta">April 1, 2026 • 5 Min Read • Hardware</h2>
 
             <div class="description blog-content">
@@ -105,11 +105,11 @@
     <script type="module">
         import { myProjects } from '../dist/projects.js';
 
-        // 1. Try to match by filename (e.g. black_crown.html)
+        // 1. Try to match by filename
         const currentFile = window.location.pathname.split('/').pop() || '';
         let matchedProject = myProjects.find(p => p.url && p.url.endsWith(currentFile));
 
-        // 2. Fallback to data ID if added to <body>
+        // 2. Fallback to data ID if added to <body> tag
         const projectId = document.body.getAttribute('data-project-id');
         if (projectId) {
             const foundById = myProjects.find(p => p.id === projectId);
