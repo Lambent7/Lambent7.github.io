@@ -9,36 +9,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterCheckboxes = document.querySelectorAll('.filter-group input[type="checkbox"]');
 
     function renderFilterCheckboxes() {
-    const filterGroup = document.querySelector('.filter-group');
-    if (!filterGroup) return;
+        const filterGroup = document.getElementById('dynamic-filters');
+        if (!filterGroup) return;
 
-    // get every tag
-    const allTags = myProjects.flatMap(p => p.filters);
-    
-    // remove duplicates and sort alphabetically
-    const uniqueTags = Array.from(new Set(allTags)).sort();
+        // get every tag
+        const allTags = myProjects.flatMap(p => p.filters).filter(t => t.trim() !== '');
+        
+        // remove duplicates and sort alphabetically
+        const uniqueTags = Array.from(new Set(allTags)).sort();
 
-    // generate the HTML for the labels/checkboxes
-    filterGroup.innerHTML = uniqueTags.map(tag => `
-        <label>
-            <input type="checkbox" value="${tag}" ${activeFilters.includes(tag) ? 'checked' : ''}>
-            ${tag}
-        </label>
-    `).join('');
+        // generate the HTML for the labels/checkboxes matches exactly with filter-pill
+        filterGroup.innerHTML = uniqueTags.map(tag => `
+            <label class="filter-pill">
+                <input type="checkbox" value="${tag}" ${activeFilters.includes(tag) ? 'checked' : ''}>
+                <span>${tag}</span>
+            </label>
+        `).join('');
 
-    // re-attach the event listeners to these new elements
-    filterGroup.querySelectorAll('input').forEach(checkbox => {
-        checkbox.addEventListener('change', (e) => {
-            const target = e.target as HTMLInputElement;
-            if (target.checked) {
-                activeFilters.push(target.value);
-            } else {
-                activeFilters = activeFilters.filter(f => f !== target.value);
-            }
-            renderProjects();
+        // re-attach the event listeners to these new elements
+        filterGroup.querySelectorAll('input').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    activeFilters.push(target.value);
+                } else {
+                    activeFilters = activeFilters.filter(f => f !== target.value);
+                }
+                renderProjects();
+            });
         });
-    });
-}
+    }
 
 const clearBtn = document.getElementById('clear-filters');
 
@@ -142,6 +142,7 @@ clearBtn?.addEventListener('click', () => {
     }
 
     // initialize
+    renderFilterCheckboxes();
     renderProjects();
     // @ts-ignore
     lucide.createIcons(); 
