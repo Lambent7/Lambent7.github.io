@@ -38,7 +38,7 @@ export const myProjects: Project[] = [
     {
         id: "steam_review_classifier",
         title: "Steam Review Classifier",
-        description: "Custom natural language neural network classifier trained on a subset of the SirSkandrani/steam_reviews_clean dataset on huggingface. Used to classifiy whether a review sounds positive or negative.",
+        description: "Natural language classifier trained on a subset of the SirSkandrani/steam_reviews_clean dataset. Classifies positive or negative",
         imagePath: "assets/steam_review_classifier.avif",
         videoPath: "assets/steam_review_classifier.av1",
         url: "https://github.com/Lambent7/SteamReviewClassifier",
