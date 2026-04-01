@@ -22,7 +22,7 @@
                 style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920');">
             </div>
         </div>
-        <a href="../projects.html" class="btn-secondary hero-back-btn">
+        <a href="../projects" class="btn-secondary hero-back-btn">
             <i data-lucide="chevron-left"></i>
             Back to Projects
         </a>
@@ -105,9 +105,9 @@
     <script type="module">
         import { myProjects } from '../dist/projects.js';
 
-        // 1. Try to match by filename (e.g. black_crown.html)
-        const currentFile = window.location.pathname.split('/').pop() || '';
-        let matchedProject = myProjects.find(p => p.url && p.url.endsWith(currentFile));
+        // 1. Try to match by filename (e.g. black_crown)
+        const currentFile = (window.location.pathname.split('/').pop() || '').replace('.html', '');
+        let matchedProject = myProjects.find(p => p.url && p.url.replace('.html', '').endsWith(currentFile));
 
         // 2. Fallback to data ID if added to <body>
         const projectId = document.body.getAttribute('data-project-id');

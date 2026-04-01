@@ -87,7 +87,7 @@ clearBtn?.addEventListener('click', () => {
                 : `<img src="${project.imagePath}" alt="${project.title}">`;
 
             return `
-                <a href="${project.url}" class="project-tile ${videoClass}" target="_blank">
+                <a href="${project.url}" class="project-tile ${videoClass}">
                     <div class="media-container">${mediaHTML}</div>
                     <div class="tile-content">
                         <div class="tile-header"><h3>${project.title}</h3>${starHTML}</div>

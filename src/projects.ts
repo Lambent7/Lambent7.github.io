@@ -17,7 +17,7 @@ export const myProjects: Project[] = [
         title: "Black Crown Game Console",
         description: "Custom gaming console powered by the BC-250 (PS5) APU Board and CachyOS (Arch Linux Fork).",
         imagePath: "assets/black_crown.avif",
-        url: "blog/black_crown.html",
+        url: "blog/black_crown",
         hasGithubRepo: false,
         isFavorite: true,
         datePosted: new Date("2026-03-31"),
@@ -47,16 +47,17 @@ export const myProjects: Project[] = [
         datePosted: new Date("2026-03-31"),
         filters: [""]
     },
-    {
-        id: "",
-        title: "",
-        description: "",
-        imagePath: "assets/.avif",
-        videoPath: "assets/.av1",
-        url: "https://github.com/Lambent7/",
-        hasGithubRepo: true,
-        isFavorite: false,
-        datePosted: new Date("2026-03-31"),
-        filters: [""]
-    },
+    // Template
+    // {
+    //     id: "",
+    //     title: "",
+    //     description: "",
+    //     imagePath: "assets/.avif",
+    //     videoPath: "assets/.av1",
+    //     url: "blog/",
+    //     hasGithubRepo: true,
+    //     isFavorite: false,
+    //     datePosted: new Date("2026-03-31"),
+    //     filters: [""]
+    // },
 ];
