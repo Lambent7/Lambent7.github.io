@@ -27,6 +27,9 @@ jobs:
       - name: Build TypeScript
         run: npx tsc # This creates the 'dist' folder on GitHub's server
 
+      - name: Remove Hidden Templates
+        run: rm -f blog/.blog_template.html
+
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
