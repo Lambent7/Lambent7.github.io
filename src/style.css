@@ -41,7 +41,8 @@ body {
 
 /* FORCE ICON SIZE: Target both the tag and the resulting SVG */
 .desktop-icon i,
-.desktop-icon svg {
+.desktop-icon svg,
+.desktop-icon img {
     width: 80px !important;  /* Bumping to 80px for high impact */
     height: 80px !important;
     margin-bottom: 15px;
