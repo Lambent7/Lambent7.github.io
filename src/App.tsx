@@ -1,0 +1,16 @@
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Projects from './pages/Projects'
+import BlogPost from './pages/BlogPost'
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/blog/:id" element={<BlogPost />} />
+    </Routes>
+  )
+}
+
+export default App
