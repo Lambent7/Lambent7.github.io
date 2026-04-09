@@ -32,7 +32,7 @@ export default function Home() {
               <img src="/assets/projects.svg" alt="Projects Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
               <span className="text-base sm:text-lg drop-shadow-md font-light">Projects</span>
             </Link>
-            <a href="/assets/temp.pdf" download className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
+            <a href="/assets/Mitchell%20Resume.pdf" download className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
               <img src="/assets/resume.svg" alt="Resume Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
               <span className="text-base sm:text-lg drop-shadow-md font-light">Resume</span>
             </a>
