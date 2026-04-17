@@ -12,7 +12,7 @@ export default function Home() {
       </header>
 
       <main className="relative z-30 bg-black pt-20 px-5 pb-35 flex justify-center before:content-[''] before:absolute before:-top-[25vh] before:left-0 before:w-full before:h-[25vh] before:bg-gradient-to-b before:from-transparent before:to-black before:pointer-events-none sm:before:-top-[15vh] sm:before:h-[15vh]">
-        <div className="max-w-[850px] text-center">
+        <div className="w-full px-4 sm:px-12 md:px-24 text-center">
           <h1 className="text-4xl sm:text-[4rem] mb-2 font-medium" style={{ textShadow: '0 0 20px rgba(255, 255, 255, 0.1)' }}>
             Hi, my name is Mitchell!
           </h1>
@@ -20,7 +20,7 @@ export default function Home() {
             (EXAMPLE) Full-Stack Developer | Hardware Enthusiast | Problem Solver
           </h2>
           
-          <p className="text-lg sm:text-[1.15rem] text-[#aaa] leading-[1.8] max-w-[700px] mx-auto mb-20">
+          <p className="text-lg sm:text-[1.15rem] text-[#aaa] leading-[1.8] w-full mb-20">
             (EXAMPLE) I specialize in building robust TypeScript applications and custom hardware solutions. 
             I bridge the gap between physical components and digital interfaces, delivering 
             high-performance tools that solve real-world problems. You should hire me because 
