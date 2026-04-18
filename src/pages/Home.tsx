@@ -1,52 +1,163 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion, useScroll, useTransform } from 'motion/react';
+import Silk from '../components/Silk';
+import ScrollReveal from '../components/ScrollReveal';
+import BlurText from '../components/BlurText';
+import GradientText from '../components/GradientText';
+import RotatingText from '../components/RotatingText';
+import Dock from '../components/Dock';
+import type { DockItemData } from '../components/Dock';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../components/ui/alert-dialog';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [showLinkedInAlert, setShowLinkedInAlert] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const fadeOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]); // Fade in dynamically only at the very bottom of the page
+
+  const navItems: DockItemData[] = [
+    {
+      icon: <img src="/assets/projects.svg" alt="Projects" className="w-[80%] h-[80%] drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] drop-shadow-[0_8px_10px_rgba(0,0,0,0.9)]" />,
+      label: 'Projects',
+      onClick: () => navigate('/projects'),
+    },
+    {
+      icon: <img src="/assets/resume.svg" alt="Resume" className="w-[80%] h-[80%] drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] drop-shadow-[0_8px_10px_rgba(0,0,0,0.9)]" />,
+      label: 'Resume',
+      onClick: () => {
+        const link = document.createElement('a');
+        link.href = '/assets/Mitchell%20Resume.pdf';
+        link.download = 'Mitchell_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      },
+    },
+    {
+      icon: <img src="/assets/briefcase.svg" alt="LinkedIn" className="w-[80%] h-[80%] drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] drop-shadow-[0_8px_10px_rgba(0,0,0,0.9)]" />,
+      label: 'LinkedIn',
+      onClick: () => setShowLinkedInAlert(true),
+    },
+    {
+      icon: <img src="/assets/computer.svg" alt="GitHub" className="w-[80%] h-[80%] drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] drop-shadow-[0_8px_10px_rgba(0,0,0,0.9)]" />,
+      label: 'GitHub',
+      onClick: () => window.open('https://github.com/Lambent7', '_blank'),
+    },
+  ];
+
   return (
-    <div className="bg-black text-white overflow-y-auto relative min-h-screen">
-      <header className="sticky top-0 w-full h-[60vh] overflow-hidden z-10 before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-20">
-        <div className="w-full h-full relative">
-          <div className="absolute inset-0 bg-cover bg-center opacity-0 animate-[slideFade_15s_infinite]" style={{ backgroundImage: "url('/assets/emotion_game.avif')", animationDelay: "0s" }}></div>
-          <div className="absolute inset-0 bg-cover bg-center opacity-0 animate-[slideFade_15s_infinite]" style={{ backgroundImage: "url('/assets/steam_review_classifier.avif')", animationDelay: "5s" }}></div>
-          <div className="absolute inset-0 bg-cover bg-center opacity-0 animate-[slideFade_15s_infinite]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920')", animationDelay: "10s" }}></div>
+    <div className="bg-black text-white relative min-h-screen w-full">
+      {/* Fixed Dock Safely Bound outside filters on viewport floor */}
+      <div className="fixed bottom-0 left-0 w-full h-[180px] flex justify-center z-50 pointer-events-none">
+        <div className="pointer-events-auto relative w-full h-full">
+           <Dock 
+             items={navItems} 
+             panelHeight={95} 
+             baseItemSize={75} 
+             magnification={120} 
+             dockHeight={150} 
+             className="backdrop-blur-md shadow-2xl"
+           />
+        </div>
+      </div>
+
+      {/* Global Fixed Silk Background */}
+      <div className="fixed inset-0 z-0 bg-black pointer-events-none">
+        <Silk speed={10} scale={0.75} color="#B071DF" noiseIntensity={1.5} rotation={0} />
+        {/* Soft fade to black at the bottom tied to scroll physics */}
+        <motion.div 
+          style={{ opacity: fadeOpacity }}
+          className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-t from-black to-transparent z-10"
+        />
+      </div>
+
+      {/* Top Header Section overlapping Silk directly */}
+      <header className="relative w-full min-h-screen flex flex-col items-center justify-center z-10 px-4 drop-shadow-[0_0_50px_rgba(0,0,0,1)] drop-shadow-[0_10px_20px_rgba(0,0,0,1)] drop-shadow-[0_0_10px_rgba(0,0,0,1)]">
+        <div className="text-center w-full flex flex-col items-center justify-center">
+          <div className="text-6xl sm:text-[7rem] sm:leading-tight mb-2 font-medium flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
+            <BlurText 
+              text="Hi, I'm"
+              delay={50}
+              initialDelay={800}
+              animateBy="words"
+              direction="bottom" 
+            />
+            <GradientText colors={['#D662AB', '#B071DF', '#917DF1']} animationSpeed={6} className="!mb-0 !pb-0 text-6xl sm:text-[7rem]">
+              <BlurText 
+                text="Mitchell Graham"
+                delay={50}
+                initialDelay={1200}
+                animateBy="words"
+                direction="bottom" 
+              />
+            </GradientText>
+          </div>
+          
+          <motion.div 
+             className="mt-8 flex justify-center w-full"
+             initial={{ filter: 'blur(10px)', opacity: 0, y: 10 }}
+             animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
+             transition={{ duration: 0.8, delay: 1.8 }}
+          >
+             <RotatingText 
+              texts={['Full-Stack Developer', 'Hardware Enthusiast', 'Problem Solver', 'UI Designer']}
+              rotationInterval={3000}
+              staggerDuration={0.03}
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '-120%', opacity: 0 }}
+              mainClassName="text-2xl sm:text-[2rem] text-purple-200 font-light tracking-widest drop-shadow-lg overflow-hidden py-2"
+              transition={{ type: 'spring', damping: 20, stiffness: 200 }}
+            />
+          </motion.div>
         </div>
       </header>
 
-      <main className="relative z-30 bg-black pt-20 px-5 pb-35 flex justify-center before:content-[''] before:absolute before:-top-[25vh] before:left-0 before:w-full before:h-[25vh] before:bg-gradient-to-b before:from-transparent before:to-black before:pointer-events-none sm:before:-top-[15vh] sm:before:h-[15vh]">
+      {/* Main Content with Frost Glass Backdrop */}
+      <main 
+        className="relative z-30 -mt-[15vh] pt-[45vh] px-5 pb-[15vh] flex justify-center w-full bg-black/40 backdrop-blur-xl"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10vh, rgba(0,0,0,0.3) 20vh, black 30vh)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10vh, rgba(0,0,0,0.3) 20vh, black 30vh)'
+        }}
+      >
         <div className="w-full px-4 sm:px-12 md:px-24 text-center">
-          <h1 className="text-4xl sm:text-[4rem] mb-2 font-medium" style={{ textShadow: '0 0 20px rgba(255, 255, 255, 0.1)' }}>
-            Hi, my name is Mitchell!
-          </h1>
-          <h2 className="text-xl sm:text-[1.6rem] text-[#888] font-light mb-[15vh] tracking-wide">
-            (EXAMPLE) Full-Stack Developer | Hardware Enthusiast | Problem Solver
-          </h2>
-          
-          <p className="text-lg sm:text-[1.15rem] text-[#aaa] leading-[1.8] w-full mb-20">
-            (EXAMPLE) I specialize in building robust TypeScript applications and custom hardware solutions. 
-            I bridge the gap between physical components and digital interfaces, delivering 
-            high-performance tools that solve real-world problems. You should hire me because 
-            I don't just write code—I build systems that last.
-          </p>
-
-          <div className="flex flex-wrap gap-4 sm:gap-16 justify-center items-start">
-            <Link to="/projects" className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
-              <img src="/assets/projects.svg" alt="Projects Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
-              <span className="text-base sm:text-lg drop-shadow-md font-light">Projects</span>
-            </Link>
-            <a href="/assets/Mitchell%20Resume.pdf" download className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
-              <img src="/assets/resume.svg" alt="Resume Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
-              <span className="text-base sm:text-lg drop-shadow-md font-light">Resume</span>
-            </a>
-            <a href="https://linkedin.com/in/graham2md" target="_blank" rel="noreferrer" className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
-              <img src="/assets/briefcase.svg" alt="LinkedIn Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
-              <span className="text-base sm:text-lg drop-shadow-md font-light">LinkedIn</span>
-            </a>
-            <a href="https://github.com/Lambent7" target="_blank" rel="noreferrer" className="group flex flex-col items-center text-white w-[100px] sm:w-[140px] p-4 rounded-xl border border-transparent hover:bg-white/10 hover:border-white/15 hover:-translate-y-1 active:bg-white/20 active:scale-95 transition-all duration-200">
-              <img src="/assets/computer.svg" alt="GitHub Icon" className="w-12 h-12 sm:w-[80px] sm:h-[80px] mb-4" />
-              <span className="text-base sm:text-lg drop-shadow-md font-light">GitHub</span>
-            </a>
+          <div className="w-full max-w-4xl mx-auto mb-20 text-[#aaa]">
+            <ScrollReveal
+              baseOpacity={0.1}
+              baseRotation={1}
+              blurStrength={2}
+            >
+              (EXAMPLE) I specialize in building robust TypeScript applications and custom hardware solutions. I bridge the gap between physical components and digital interfaces, delivering high-performance tools that solve real-world problems. You should hire me because I don't just write code—I build systems that last.
+            </ScrollReveal>
           </div>
         </div>
       </main>
+
+      {/* LinkedIn Privacy Modal */}
+      <AlertDialog open={showLinkedInAlert} onOpenChange={setShowLinkedInAlert}>
+        <AlertDialogContent className="bg-black/30 backdrop-blur-2xl border-white/10 text-white rounded-3xl p-8 sm:max-w-xl shadow-[0_0_80px_rgba(0,0,0,1)]">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-3xl font-bold tracking-wide text-neutral-100 flex items-center gap-4">
+              <span className="bg-white/5 w-11 h-11 flex items-center justify-center rounded-xl border border-white/10 shrink-0">
+                <img src="/assets/briefcase.svg" alt="" className="w-6 h-6 opacity-90 mix-blend-screen brightness-200" />
+              </span>
+              Privacy Notice
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base text-neutral-200 leading-relaxed mt-4">
+              As an advocate for digital privacy, I have significant concerns regarding LinkedIn's data collection policies and ongoing privacy litigation. While I maintain a profile strictly for indexing and discoverability, I limit my direct engagement on the platform.
+              <br/><br/>
+              For more information regarding these privacy concerns: <a href="https://browsergate.eu/" target="_blank" rel="noopener noreferrer" className="text-[#b071df] hover:opacity-80 underline font-medium transition-colors">https://browsergate.eu/</a>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="mt-8 sm:justify-start gap-3 !bg-transparent !border-0 !m-0 !p-0 flex-row">
+            <AlertDialogCancel className="bg-white/5 hover:bg-white/10 text-white border-white/10 rounded-lg px-4 py-2 text-sm font-medium transition-colors h-10 flex items-center justify-center">Close</AlertDialogCancel>
+            <AlertDialogAction onClick={() => window.open('https://linkedin.com/in/graham2md', '_blank')} className="bg-[#b071df] hover:opacity-90 text-white rounded-lg px-4 py-2 text-sm font-medium outline-none border-none transition-colors h-10 flex items-center justify-center">              Continue to LinkedIn
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
